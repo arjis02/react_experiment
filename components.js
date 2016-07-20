@@ -93,8 +93,14 @@ var CommentBox = React.createClass({
 var Board = React.createClass({
   getInitialState: function() {
     return {
-      comments: ['I am the man!', 'This is it!', 'What is good?']
+      comments: []
     }
+  },
+
+  add: function(text) {
+    var arr = this.state.comments;
+    arr.push(text);
+    this.setState({ comments: arr});
   },
 
   removeComment: function(i) {
@@ -114,6 +120,7 @@ var Board = React.createClass({
   render: function() {
     return (
       <div>
+        <button onClick={this.add.bind(null, 'Default Text')} className="btn-info">Add</button>
         {this.state.comments.map( (comment, i) => 
           <CommentBox key={i} indexOf={i} updateCommentText={this.updateComment} deleteFromBoard={this.removeComment}>
             {comment}
